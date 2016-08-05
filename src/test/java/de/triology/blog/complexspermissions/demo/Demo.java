@@ -82,7 +82,7 @@ public class Demo {
     }
 
     @Test
-    public void allowsReadAccessToAllAncestors() throws Exception {
+    public void allowsReadAccessToAncestors() throws Exception {
         RequestedFileAccess requestedFileAccess = new RequestedFileAccess(
                 filePath("departments/development"), FileOperation.READ);
         assertTrue(subject.isPermitted(requestedFileAccess));

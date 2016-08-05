@@ -46,8 +46,8 @@ public class RequestedFileAccess implements Permission {
         return operation;
     }
 
+    @Override
     public boolean implies(Permission permission) {
         return false;
     }
-
 }

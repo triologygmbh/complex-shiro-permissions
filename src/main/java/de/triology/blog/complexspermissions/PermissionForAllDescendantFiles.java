@@ -23,7 +23,6 @@
  */
 package de.triology.blog.complexspermissions;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 import static de.triology.blog.complexspermissions.FileRelations.is;

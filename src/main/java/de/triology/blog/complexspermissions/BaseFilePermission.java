@@ -25,7 +25,6 @@ package de.triology.blog.complexspermissions;
 
 import org.apache.shiro.authz.Permission;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 abstract class BaseFilePermission implements Permission {

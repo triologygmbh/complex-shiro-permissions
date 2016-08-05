@@ -68,7 +68,7 @@ public class Demo {
     }
 
     @Test
-    public void doesNotAllowWriteAccessIdOnlyReadIsPermitted() throws Exception {
+    public void doesNotAllowWriteAccessIfOnlyReadIsPermitted() throws Exception {
         RequestedFileAccess requestedFileAccess = new RequestedFileAccess(
                 filePath("departments/development/employee_987"), FileOperation.WRITE);
         assertFalse(subject.isPermitted(requestedFileAccess));

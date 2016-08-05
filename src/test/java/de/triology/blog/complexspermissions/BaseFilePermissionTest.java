@@ -107,7 +107,7 @@ public class BaseFilePermissionTest {
         }
 
         @Override
-        protected boolean accessIsAllowed(RequestedFileAccess requestedFileAccess) {
+        protected boolean accessIsAllowed(Path requestedFile) {
             return accessAllowedBySubclass;
         }
     }

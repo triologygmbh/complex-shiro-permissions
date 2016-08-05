@@ -47,7 +47,7 @@ abstract class BaseFilePermission implements Permission {
     }
 
     private boolean fileAccessIsImplied(RequestedFileAccess requestedFileAccess) {
-        return requestedOperationIsImplied(requestedFileAccess) && accessIsAllowed(requestedFileAccess);
+        return requestedOperationIsImplied(requestedFileAccess) && accessIsAllowed(requestedFileAccess.getRequestedFile());
     }
 
     private boolean requestedOperationIsImplied(RequestedFileAccess requestedFileAccess) {
@@ -65,8 +65,8 @@ abstract class BaseFilePermission implements Permission {
     /**
      * Template method called during permission check that allows subclasses to check access permissions.
      *
-     * @param requestedFileAccess RequestedFileAccess
+     * @param requestedFile Path
      * @return true if the RequestedFileAccess is granted
      */
-    protected abstract boolean accessIsAllowed(RequestedFileAccess requestedFileAccess);
+    protected abstract boolean accessIsAllowed(Path requestedFile);
 }

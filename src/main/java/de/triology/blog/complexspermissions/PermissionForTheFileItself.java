@@ -34,8 +34,7 @@ class PermissionForTheFileItself extends BaseFilePermission {
     }
 
     @Override
-    protected boolean accessIsAllowed(RequestedFileAccess requestedFileAccess) {
-        Path requestedFile = requestedFileAccess.getRequestedFile();
+    protected boolean accessIsAllowed(Path requestedFile) {
         return is(requestedFile).theSameAs(ownFile);
     }
 }

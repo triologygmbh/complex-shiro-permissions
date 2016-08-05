@@ -62,37 +62,44 @@ public class Demo {
 
     @Test
     public void allowsPermittedAccessToAFile() throws Exception {
-        RequestedFileAccess requestedFileAccess = createFileReadAccessRequest("departments/development/employee_987");
+        RequestedFileAccess requestedFileAccess = new RequestedFileAccess(
+                filePath("departments/development/employee_987"), FileOperation.READ);
         assertTrue(subject.isPermitted(requestedFileAccess));
     }
 
     @Test
     public void doesNotAllowWriteAccessIdOnlyReadIsPermitted() throws Exception {
-        RequestedFileAccess requestedFileAccess = createFileWriteAccessRequest("departments/development/employee_987");
+        RequestedFileAccess requestedFileAccess = new RequestedFileAccess(
+                filePath("departments/development/employee_987"), FileOperation.WRITE);
+        assertFalse(subject.isPermitted(requestedFileAccess));
+    }
+
+    @Test
+    public void doesNotAllowAccessToAnotherFile() throws Exception {
+        RequestedFileAccess requestedFileAccess = new RequestedFileAccess(
+                filePath("departments/development/employee_789"), FileOperation.READ);
         assertFalse(subject.isPermitted(requestedFileAccess));
     }
 
     @Test
     public void allowsReadAccessToAllAncestors() throws Exception {
-        RequestedFileAccess requestedFileAccess = createFileReadAccessRequest("departments/development");
+        RequestedFileAccess requestedFileAccess = new RequestedFileAccess(
+                filePath("departments/development"), FileOperation.READ);
         assertTrue(subject.isPermitted(requestedFileAccess));
     }
 
     @Test
+    public void doesNotAllowWriteAccessToAncestors() throws Exception {
+        RequestedFileAccess requestedFileAccess = new RequestedFileAccess(
+                filePath("departments/development"), FileOperation.WRITE);
+        assertFalse(subject.isPermitted(requestedFileAccess));
+    }
+
+    @Test
     public void allowsPermittedAccessToDescendantFile() throws Exception {
-        RequestedFileAccess requestedFileAccess = createFileWriteAccessRequest("departments/finance/employee_123");
+        RequestedFileAccess requestedFileAccess = new RequestedFileAccess(
+                filePath("departments/finance/employee_123"), FileOperation.WRITE);
         assertTrue(subject.isPermitted(requestedFileAccess));
     }
 
-    private RequestedFileAccess createFileReadAccessRequest(String path) {
-        return createFileAccessRequest(path, FileOperation.READ);
-    }
-
-    private RequestedFileAccess createFileWriteAccessRequest(String path) {
-        return createFileAccessRequest(path, FileOperation.WRITE);
-    }
-
-    private RequestedFileAccess createFileAccessRequest(String path, FileOperation fileOperation) {
-        return new RequestedFileAccess(filePath(path), fileOperation);
-    }
 }

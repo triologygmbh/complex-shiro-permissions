@@ -40,7 +40,16 @@ class FileRelations {
         return fileRelations;
     }
 
-    boolean descendantOf(Path potentialAncestor) throws IOException {
+    boolean descendantOf(Path potentialAncestor) {
+        try {
+            return isDescendantOf(potentialAncestor);
+        } catch (IOException e) {
+            // wrap checked exception to avoid cluttering up the example code
+            throw new RuntimeException(e);
+        }
+    }
+
+    private boolean isDescendantOf(Path potentialAncestor) throws IOException {
         return Files.walk(potentialAncestor)
                 .anyMatch(descendant -> descendant.equals(file));
     }

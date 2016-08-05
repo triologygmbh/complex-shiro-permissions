@@ -30,25 +30,16 @@ import java.nio.file.Path;
 
 abstract class BaseFilePermission implements Permission {
 
-    protected final Path file;
+    protected final Path ownFile;
     protected final FileOperation operation;
 
     public BaseFilePermission(Path file, FileOperation operation) {
-        this.file = file;
+        this.ownFile = file;
         this.operation = operation;
     }
 
     @Override
     final public boolean implies(Permission permission) {
-        try {
-            return isImplied(permission);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private boolean isImplied(Permission permission) throws IOException {
         return isFileAccessRequest(permission) && fileAccessIsImplied((RequestedFileAccess) permission);
     }
 
@@ -56,7 +47,7 @@ abstract class BaseFilePermission implements Permission {
         return permission instanceof RequestedFileAccess;
     }
 
-    private boolean fileAccessIsImplied(RequestedFileAccess requestedFileAccess) throws IOException {
+    private boolean fileAccessIsImplied(RequestedFileAccess requestedFileAccess) {
         return requestedOperationIsImplied(requestedFileAccess) && accessIsAllowed(requestedFileAccess);
     }
 
@@ -78,5 +69,5 @@ abstract class BaseFilePermission implements Permission {
      * @param requestedFileAccess RequestedFileAccess
      * @return true if the RequestedFileAccess is granted
      */
-    protected abstract boolean accessIsAllowed(RequestedFileAccess requestedFileAccess) throws IOException;
+    protected abstract boolean accessIsAllowed(RequestedFileAccess requestedFileAccess);
 }

@@ -35,8 +35,8 @@ public class ReadPermissionForDirectAncestors extends BaseFilePermission {
     }
 
     @Override
-    protected boolean accessIsAllowed(RequestedFileAccess requestedFileAccess) throws IOException {
+    protected boolean accessIsAllowed(RequestedFileAccess requestedFileAccess) {
         Path requestedFile = requestedFileAccess.getRequestedFile();
-        return is(file).descendantOf(requestedFile);
+        return is(ownFile).descendantOf(requestedFile);
     }
 }

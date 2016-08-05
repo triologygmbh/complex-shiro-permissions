@@ -31,11 +31,11 @@ import java.nio.file.Paths;
 import static de.triology.blog.complexspermissions.PathUtils.filePath;
 import static org.junit.Assert.*;
 
-public class ReadPermissionForDirectAncestorsTest {
+public class ReadPermissionForAncestorsTest {
 
     @Test
     public void passesReadAsFileOperationToItsBaseClass() throws Exception {
-        ReadPermissionForDirectAncestors permission = new ReadPermissionForDirectAncestors(Paths.get("some/file/path"));
+        ReadPermissionForAncestors permission = new ReadPermissionForAncestors(Paths.get("some/file/path"));
         assertEquals(FileOperation.READ, permission.operation);
     }
 
@@ -43,7 +43,7 @@ public class ReadPermissionForDirectAncestorsTest {
     public void impliesAccessToDirectAncestorFiles() throws Exception {
         Path parentDirectory = filePath("dir_a/dir_b");
         Path descendantFile =  filePath("dir_a/dir_b/dir_c/file");
-        ReadPermissionForDirectAncestors permission = new ReadPermissionForDirectAncestors(descendantFile);
+        ReadPermissionForAncestors permission = new ReadPermissionForAncestors(descendantFile);
         RequestedFileAccess requestedFileAccess = new RequestedFileAccess(parentDirectory, FileOperation.READ);
         assertTrue(permission.implies(requestedFileAccess));
     }
@@ -52,7 +52,7 @@ public class ReadPermissionForDirectAncestorsTest {
     public void deniesAccessToFilesTharAreNotDescendants() throws Exception {
         Path notAnAncestor = filePath("dir_1");
         Path descendantFile =  filePath("dir_a/dir_b/dir_c/file");
-        ReadPermissionForDirectAncestors permission = new ReadPermissionForDirectAncestors(descendantFile);
+        ReadPermissionForAncestors permission = new ReadPermissionForAncestors(descendantFile);
         RequestedFileAccess requestedFileAccess = new RequestedFileAccess(notAnAncestor, FileOperation.READ);
         assertFalse(permission.implies(requestedFileAccess));
     }

@@ -51,7 +51,7 @@ public class ComplexPermissionRealm extends AuthorizingRealm {
     private Collection<Permission> createFilePermissions() {
         return Arrays.asList(
                 new PermissionForTheFileItself(filePath("departments/development/employee_987"), FileOperation.READ),
-                new ReadPermissionForDirectAncestors(filePath("departments/development/employee_987")),
+                new ReadPermissionForAncestors(filePath("departments/development/employee_987")),
                 new PermissionForTheFileItself(filePath("departments/finance"), FileOperation.WRITE),
                 new PermissionForAllDescendantFiles(filePath("departments/finance"), FileOperation.WRITE));
     }

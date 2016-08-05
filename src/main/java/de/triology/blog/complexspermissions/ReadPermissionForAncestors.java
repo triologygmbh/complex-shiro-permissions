@@ -23,14 +23,13 @@
  */
 package de.triology.blog.complexspermissions;
 
-import java.io.IOException;
 import java.nio.file.Path;
 
 import static de.triology.blog.complexspermissions.FileRelations.is;
 
-public class ReadPermissionForDirectAncestors extends BaseFilePermission {
+public class ReadPermissionForAncestors extends BaseFilePermission {
 
-    public ReadPermissionForDirectAncestors(Path file) {
+    public ReadPermissionForAncestors(Path file) {
         super(file, FileOperation.READ);
     }
 

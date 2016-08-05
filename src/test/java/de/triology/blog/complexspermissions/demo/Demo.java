@@ -56,7 +56,7 @@ public class Demo {
     }
 
     @Before
-    public void optainSubject() throws Exception {
+    public void obtainSubject() throws Exception {
         subject = SecurityUtils.getSubject();
     }
 

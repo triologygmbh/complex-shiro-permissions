@@ -32,7 +32,7 @@ abstract class BaseFilePermission implements Permission {
     protected final Path ownFile;
     protected final FileOperation operation;
 
-    public BaseFilePermission(Path file, FileOperation operation) {
+    BaseFilePermission(Path file, FileOperation operation) {
         this.ownFile = file;
         this.operation = operation;
     }
@@ -59,7 +59,7 @@ abstract class BaseFilePermission implements Permission {
     }
 
     private boolean writeIsPermitted() {
-        return operation == FileOperation.WRITE;
+        return this.operation == FileOperation.WRITE;
     }
 
     /**

@@ -29,15 +29,14 @@ import java.nio.file.Path;
 
 class FileRelations {
 
-    private Path file;
+    private final Path file;
 
-    private FileRelations() {
+    private FileRelations(Path file) {
+        this.file = file;
     }
 
     static FileRelations is(Path file) {
-        FileRelations fileRelations = new FileRelations();
-        fileRelations.file = file;
-        return fileRelations;
+        return new FileRelations(file);
     }
 
     boolean descendantOf(Path potentialAncestor) {
@@ -51,11 +50,11 @@ class FileRelations {
 
     private boolean isDescendantOf(Path potentialAncestor) throws IOException {
         return Files.walk(potentialAncestor)
-                .anyMatch(descendant -> descendant.equals(file));
+                .anyMatch(descendant -> descendant.equals(this.file));
     }
 
     boolean theSameAs(Path otherFile) {
-        return file.equals(otherFile);
+        return this.file.equals(otherFile);
     }
 
 }

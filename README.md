@@ -1,5 +1,7 @@
 # complex-shiro-permissions
-A demonstration on how to implement complex permissions with Apache Shiro
+A demonstration on how to implement complex permissions with Apache Shiro.
+
+Read the tutorial here: [Apache Shiro: Implementing complex permissions autonomously](https://www.triology.de/en/blog-entries/apache-shiro).
 
 ## Contents
 This Maven project shows how to realize complex permissions by providing custom implementations of Apache Shiro's `Permission` interface.
